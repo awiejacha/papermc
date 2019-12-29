@@ -1,0 +1,8 @@
+.idea
+.env
+config/*
+!config/.gitkeep
+plugins/*
+!plugins/.gitkeep
+worlds/*
+!worlds/.gitkeep
