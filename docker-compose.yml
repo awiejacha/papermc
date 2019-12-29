@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  server:
+    container_name: server
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - SERVER_VER=${SERVER_VER}
+        - SERVER_WORK_DIR=${SERVER_WORK_DIR}
+    env_file: .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+      - ${WEB_CONSOLE_PORT}:${WEB_CONSOLE_PORT}
+    volumes:
+      - ./plugins:${SERVER_WORK_DIR}/plugins
+      - ./worlds/szerescioch/:${SERVER_WORK_DIR}/szerescioch
+      - ./worlds/szerescioch_nether:/sipgot/szerescioch_nether
+      - ./worlds/szerescioch_the_end:${SERVER_WORK_DIR}/szerescioch_the_end
+      - ./config/banned-ips.json:${SERVER_WORK_DIR}/banned-ips.json
+      - ./config/banned-players.json:${SERVER_WORK_DIR}/banned-players.json
+      - ./config/bukkit.yml:${SERVER_WORK_DIR}/bukkit.yml
+      - ./config/commands.yml:${SERVER_WORK_DIR}/commands.yml
+      - ./config/help.yml:${SERVER_WORK_DIR}/help.yml
+      - ./config/ops.json:${SERVER_WORK_DIR}/ops.json
+      - ./config/server.properties:${SERVER_WORK_DIR}/server.properties
+      - ./config/spigot.yml:${SERVER_WORK_DIR}/spigot.yml
+      - ./config/whitelist.json:${SERVER_WORK_DIR}/whitelist.json
